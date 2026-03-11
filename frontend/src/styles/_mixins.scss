@@ -1,0 +1,25 @@
+@use 'variables' as *;
+
+@mixin btn($bg) {
+  padding: $space-md $space-lg;
+  background: $bg;
+  color: $white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover:not(:disabled) { filter: brightness(0.9); }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -6,7 +6,7 @@ import {
   Pagination,
   ErrorMessage,
 } from './components';
-import './App.css';
+import './styles/App.scss';
 
 function App() {
   const {

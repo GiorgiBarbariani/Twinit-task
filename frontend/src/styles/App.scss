@@ -1,0 +1,128 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations';
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: $gray-100;
+  color: $gray-900;
+}
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.app-header h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: $primary;
+}
+
+.app-main {
+  background: $white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: $space-xl;
+}
+
+.task-form {
+  display: flex;
+  gap: $space-sm;
+  margin-bottom: $space-xl;
+
+  input {
+    flex: 1;
+    padding: $space-md;
+    border: 1px solid $gray-200;
+    border-radius: 4px;
+    &:focus { outline: none; border-color: $primary; }
+  }
+
+  button { @include btn($primary); }
+}
+
+.task-filter {
+  display: flex;
+  gap: $space-sm;
+  margin-bottom: $space-lg;
+
+  button {
+    padding: $space-sm $space-lg;
+    background: $gray-200;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &.active { background: $primary; color: $white; }
+
+    &:nth-child(2).active { background: $success; }
+    &:nth-child(3).active { background: $completed; }
+  }
+}
+
+.task-list { list-style: none; }
+
+.task-list-loading,
+.task-list-empty {
+  text-align: center;
+  padding: 2rem;
+  color: $gray-500;
+}
+
+.task-item {
+  @include flex-between;
+  padding: $space-md;
+  border-bottom: 1px solid $gray-200;
+  animation: slideIn 0.3s;
+
+  &:last-child { border-bottom: none; }
+  &.completed {
+    background: rgba($completed, 0.05);
+    .task-title { text-decoration: line-through; color: $completed; }
+  }
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+
+  input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    accent-color: $success;
+    cursor: pointer;
+
+    &:checked { accent-color: $completed; }
+  }
+}
+
+.task-date { font-size: 0.85rem; color: $gray-500; }
+
+.pagination {
+  @include flex-center;
+  gap: $space-lg;
+  margin-top: $space-xl;
+  padding-top: $space-lg;
+  border-top: 1px solid $gray-200;
+
+  button { @include btn($primary); }
+}
+
+.pagination-info { color: $gray-500; }
+
+.error-message {
+  @include flex-between;
+  padding: $space-md;
+  margin-bottom: $space-lg;
+  background: #ffebee;
+  border-radius: 4px;
+  color: $error;
+  animation: shake 0.3s;
+}
+
+.retry-button { @include btn($error); padding: 0.25rem $space-md; }
